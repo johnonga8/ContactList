@@ -33,5 +33,17 @@
         <h4 id="contact-phone"></h4>
     </div>
     
+    <script id="contacts-template" type="text/x-kendo-template">
+    	<li>
+        	# if(name.givenName){ # 
+            	${name.givenName}
+            # } #
+            
+        	# if(name.familyName){ # 
+            	${name.familyName}
+            # } #
+        </li>
+    </script>
+    
 </body>
 </html>
