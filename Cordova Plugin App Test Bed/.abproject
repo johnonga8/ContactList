@@ -9,7 +9,6 @@
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
-    "1",
     "2"
   ],
   "iOSBackgroundMode": [],
@@ -22,6 +21,8 @@
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "FrameworkVersion": "3.7.0",
   "CorePlugins": [
+    "com.telerik.mobiletesting@2.3.1.2",
+    "nl.x-services.plugins.toast@2.1.0",
     "org.apache.cordova.battery-status",
     "org.apache.cordova.camera",
     "org.apache.cordova.console",
@@ -63,6 +64,7 @@
     "android.permission.WRITE_EXTERNAL_STORAGE"
   ],
   "DeviceOrientations": [
+    "Portrait",
     "Landscape"
   ],
   "AndroidHardwareAcceleration": "false",

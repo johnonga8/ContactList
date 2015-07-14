@@ -33,4 +33,54 @@
         });
         dataSource.read();
     }
+    
+    window.getContactDetails = function(e){
+        selectedContactId = e.view.params.id;
+        var options = new ContactFindOptions();
+        options.filter = e.view.params.id;
+        options.multiple = true;
+        var fields = ["*"];
+        navigator.contacts.find(fields, onContactDetailSuccess, onError, options);
+    }
+   
+    window.updatePhoto = function() {
+        navigator.camera.getPicture(onPhotoSuccess, onError, { quality: 50, destinationType: Camera.DestinationType.FILE_URI });
+    }
+
+    function onPhotoSuccess(imageURI) {
+        $(".largeProfile").attr("src", imageURI);
+        var photo=[];
+        photo[0] = new ContactField('photo', imageURI, false)
+        selectedContact.photos = photo;
+        selectedContact.save();
+        if (window.plugins && window.plugins.toast) {
+    window.plugins.toast.showShortCenter("The profile picture has been updated!");
+}
+    } 
+       
+    function onContactDetailSuccess(contacts) {
+        for (var i = 0; i < contacts.length; i++) 
+        {  
+            if (contacts[i].id == selectedContactId)
+            {
+                $("#contact-name").text(getName(contacts[i]));
+
+                if (contacts[i].phoneNumbers) {
+                    $("#contact-phone").text(contacts[i].phoneNumbers[0].value);
+                } else {
+                    $("#contact-phone").text("");
+                }
+
+                if (contacts[i].photos && contacts[i].photos.length) {
+                    $(".largeProfile").attr("src", contacts[i].photos[0].value);
+                } else {
+                    $(".largeProfile").attr("src", "styles/blankProfile.png");
+                }
+
+                selectedContact = contacts[i];
+
+                break;
+            }
+        }  
+    }
 }());
